@@ -21,6 +21,29 @@ const PDF_DATA_URI = "data:application/pdf;base64,JVBERi0xLjcNCiW1tbW1DQoxIDAgb2
 
 const PDF_FILENAME = "Oxy-Finserv-DSA-Colending-Bridge-Loans.pdf";
 
+const FAQS = [
+  {
+    question: "What does Oxy Finserv do?",
+    answer:
+      "Oxy Finserv sources, verifies, and services borrowers for banks and NBFCs through DSA, co-lending, and bridge loan partnerships.",
+  },
+  {
+    question: "Do you hold customer money?",
+    answer:
+      "No. The lending flow is escrow-backed, so funds move through lender-controlled accounts rather than through Oxy Finserv's own account.",
+  },
+  {
+    question: "Which partnership models are available?",
+    answer:
+      "Three core models: DSA for borrower acquisition and servicing, co-lending for shared funding, and bridge loans for seasoning and handover.",
+  },
+  {
+    question: "Where do you operate?",
+    answer:
+      "Oxy Finserv serves partners across India and works with a founding team distributed across Mumbai, Hyderabad, and Bengaluru.",
+  },
+];
+
 function pad(n) {
   return String(n + 1).padStart(2, "0");
 }
@@ -112,8 +135,25 @@ export default function OxyFinservLanding() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   }
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className="ofs-root">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
 
@@ -189,9 +229,11 @@ export default function OxyFinservLanding() {
         .ofs-hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
 
         .ofs-btn{
+          appearance:none;
           display:inline-flex; align-items:center; gap:8px;
           padding:14px 26px; border-radius:3px;
           font-size:0.95rem; font-weight:500; text-decoration:none;
+          font-family:inherit;
           cursor:pointer; border:1px solid transparent;
           transition:transform .15s ease, box-shadow .15s ease;
         }
@@ -282,6 +324,17 @@ export default function OxyFinservLanding() {
         }
         .ofs-bureau-pill .check{color:var(--green); font-weight:700;}
 
+        .ofs-faq-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+        .ofs-faq-item{
+          background:#fff; border:1px solid var(--line); border-radius:6px;
+          padding:18px 22px;
+        }
+        .ofs-faq-item summary{
+          cursor:pointer; list-style:none; font-size:1.02rem; color:var(--navy); font-weight:600;
+        }
+        .ofs-faq-item summary::-webkit-details-marker{display:none;}
+        .ofs-faq-item p{margin-top:12px; color:var(--ink-soft); line-height:1.6;}
+
         .ofs-cta-band{
           background:var(--green); color:#fff; border-radius:8px; padding:56px 48px;
           display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
@@ -338,6 +391,7 @@ export default function OxyFinservLanding() {
           .ofs-models-grid{grid-template-columns:1fr;}
           .ofs-nav-links{display:none;}
           .ofs-cta-band{flex-direction:column; align-items:flex-start;}
+          .ofs-faq-grid{grid-template-columns:1fr;}
           .ofs-contact-grid{grid-template-columns:1fr;}
         }
       `}</style>
@@ -364,7 +418,7 @@ export default function OxyFinservLanding() {
             <p className="lede">Oxy Finserv connects regulated banks and NBFCs with everyday borrowers across India — through compliant sourcing, escrow-backed disbursal, and a decade of on-ground lending experience.</p>
             <div className="ofs-hero-ctas">
               <a className="ofs-btn ofs-btn-primary" href="#deck-content" onClick={(e) => { e.preventDefault(); scrollToDeck(); }}>View the presentation</a>
-              <a className="ofs-btn ofs-btn-outline" href="#" onClick={downloadPdf}>Download PDF ↓</a>
+              <button className="ofs-btn ofs-btn-outline" type="button" onClick={downloadPdf}>Download PDF ↓</button>
             </div>
           </div>
 
@@ -491,7 +545,26 @@ export default function OxyFinservLanding() {
               <h2>Take the deck with you</h2>
               <p>Get the full Oxy Finserv presentation as a PDF — every slide, model, and stat, ready to share with your team.</p>
             </div>
-            <a className="ofs-btn ofs-btn-primary" href="#" onClick={downloadPdf}>Download PDF ↓</a>
+            <button className="ofs-btn ofs-btn-primary" type="button" onClick={downloadPdf}>Download PDF ↓</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="ofs-section" id="faq">
+        <div className="ofs-wrap">
+          <div className="ofs-section-head">
+            <span className="ofs-kicker">Answer engine friendly</span>
+            <h2>Quick answers for partners, investors, and search engines</h2>
+            <p>Short, direct answers make the page easier to scan and easier for answer engines to quote accurately.</p>
+          </div>
+
+          <div className="ofs-faq-grid">
+            {FAQS.map((faq) => (
+              <details className="ofs-faq-item" key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
