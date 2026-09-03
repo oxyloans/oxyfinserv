@@ -1,0 +1,41 @@
+.eco-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.eco-card {
+  padding: 28px 26px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.eco-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.eco-role {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--green-deep);
+}
+
+.eco-detail {
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: #4a534d;
+  line-height: 1.55;
+}
+
+@media (max-width: 780px) {
+  .eco-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .eco-grid { grid-template-columns: 1fr; }
+}
