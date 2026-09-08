@@ -1,4 +1,5 @@
 import "./Footer.css";
+import logo from "../assets/oxyfinservlogo.png";
 
 export default function Footer() {
   return (
@@ -13,22 +14,19 @@ export default function Footer() {
             Tell us whether you're evaluating a DSA arrangement, a co-lending line, or a
             bridge loan structure — we'll bring the pipeline and the paperwork.
           </p>
-          <a className="btn btn-invert footer__btn" href="mailto:partnerships@oxyfinserv.com">
-            partnerships@oxyfinserv.com
+          <a className="btn btn-invert footer__btn" href="mailto:team@oxyloans.in">
+            team@oxyloans.in
           </a>
         </div>
 
         <div className="footer__meta">
           <div className="brand-mark">
-            <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
-              <rect width="32" height="32" rx="6" fill="#f6f4ee" />
-              <path d="M9 20 L16 9 L23 20" stroke="#16223f" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="16" cy="21.5" r="2.1" fill="#16223f" />
-            </svg>
-            <span>Oxy Finserv</span>
+            <img src={logo} alt="Oxy Finserv" style={{ width: "70%", height: "auto" }} />
           </div>
           <p>An OxyLoans initiative &middot; DSA &middot; Co-Lending &middot; Bridge Loan Partner</p>
+          <p>CC-02, Ground Floor, Block-C,INDU FORTUNE FIELDS, The Annexe, Phase-13, Kukatpally Housing Board Colony, Kukatpally, Hyderabad, Telangana 500085</p>
           <p className="footer__copyright">&copy; {new Date().getFullYear()} Oxy Finserv. All rights reserved.</p>
+          
         </div>
       </div>
     </footer>
